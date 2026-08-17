@@ -3,246 +3,298 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-<title>Secure App - Register</title>
+<title>Secure App - Login</title>
 <style>
 :root {
-    --primary: linear-gradient(135deg, #4f46e5, #2563eb);
-    --primary-hover: linear-gradient(135deg, #4338ca, #1d4ed8);
-    --bg: #f3f4f6;
-    --card-bg: #ffffff;
-    --text-main: #1f2937;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
+    --primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --primary-hover: linear-gradient(135deg, #4f46e5, #7c3aed);
+    --card-bg: rgba(15, 23, 42, 0.72);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.25);
 }
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
-body{
-background: var(--bg);
-color: var(--text-main);
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-padding: 20px;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-main);
+    background: #020617;
+    overflow-x: hidden;
+    position: relative;
 }
-#authPage{
-width: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
+.space-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at bottom, #1e1b4b 0%, #0f172a 40%, #020617 100%);
+    overflow: hidden;
 }
-.login-container{
-width: 100%;
-max-width: 400px;
-background: var(--card-bg);
-border-radius: 24px;
-padding: 35px 30px;
-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-text-align: center;
+.stars, .stars2, .stars3 {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+    pointer-events: none;
 }
-.logo-box{
-background: var(--primary);
-width: 70px;
-height: 70px;
-border-radius: 18px;
-margin: 0 auto 20px;
-display: flex;
-justify-content: center;
-align-items: center;
-box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
-color: white;
-font-size: 24px;
-font-weight: 800;
+.stars {
+    background-image: 
+        radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 40px 70px, rgba255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, rgba255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 230px 80px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 300px 150px, rgba255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 380px 60px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 450px 180px, #fff, transparent);
+    background-size: 500px 200px;
+    animation: drift 120s linear infinite;
+    opacity: 0.9;
 }
-h2{
-font-size: 24px;
-font-weight: 700;
-margin-bottom: 6px;
+.stars2 {
+    background-image: 
+        radial-gradient(1px 1px at 50px 50px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 120px 100px, rgba255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 200px 20px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 280px 140px, #fff, transparent),
+        radial-gradient(1px 1px at 350px 90px, rgba255,255,255,0.8), transparent);
+    background-size: 400px 180px;
+    animation: drift 80s linear infinite reverse;
+    opacity: 0.6;
 }
-.subtitle{
-color: var(--text-muted);
-font-size: 14px;
-margin-bottom: 25px;
+.stars3 {
+    background-image: 
+        radial-gradient(1.5px 1.5px at 70px 20px, #a5b4fc, transparent),
+        radial-gradient(1px 1px at 150px 160px, #c4b5fd, transparent),
+        radial-gradient(1.5px 1.5px at 250px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 320px 130px, #a5b4fc, transparent);
+    background-size: 350px 200px;
+    animation: drift 150s linear infinite;
+    opacity: 0.5;
 }
-.input-group{
-background: #f9fafb;
-border-radius: 14px;
-padding: 14px 16px;
-display: flex;
-align-items: center;
-border: 1px solid var(--border);
-transition: all 0.2s ease;
-margin-bottom: 16px;
+@keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-200px); }
+}
+.galaxy {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(99, 102, 241, 0.08) 40%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    filter: blur(40px);
+    animation: pulse-galaxy 12s ease-in-out infinite alternate;
+}
+.galaxy2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+    bottom: -80px;
+    left: -80px;
+    filter: blur(30px);
+    animation: pulse-galaxy 15s ease-in-out infinite alternate-reverse;
+}
+@keyframes pulse-galaxy {
+    from { opacity: 0.6; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.1); }
+}
+.moon {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f8fafc, #cbd5e1 50%, #94a3b8);
+    top: 12%;
+    right: 12%;
+    box-shadow: 
+        0 0 40px rgba(248, 250, 252, 0.3),
+        inset -12px -8px 20px rgba(15, 23, 42, 0.3);
+    animation: moon-float 20s ease-in-out infinite;
+    z-index: 1;
+}
+.moon::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.4);
+    top: 22px;
+    left: 28px;
+}
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.35);
+    top: 45px;
+    left: 50px;
+}
+@keyframes moon-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+}
+.shooting-star {
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #fff, transparent);
+    border-radius: 50%;
+    top: 25%;
+    left: -100px;
+    opacity: 0;
+    animation: shoot 8s linear infinite;
+    animation-delay: 3s;
+}
+@keyframes shoot {
+    0% { transform: translateX(0) translateY(0); opacity: 0; }
+    5% { opacity: 1; }
+    20% { transform: translateX(100vw) translateY(80px); opacity: 0; }
+    100% { opacity: 0; }
+}
+#authPage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 36px 30px;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(148, 163, 184, 0.12);
+    text-align: center;
+    border: 1px solid var(--border);
+}
+.logo-box {
+    background: var(--primary);
+    width: 64px;
+    height: 64px;
+    border-radius: 60px;
+    margin: 0 auto 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.45);
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+}
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #f8fafc;
+}
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+.input-group {
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+    margin-bottom: 14px;
 }
 .input-group:focus-within {
-    border-color: #2563eb;
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    border-color: #818cf8;
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
 }
-.input-group input{
-border: none;
-outline: none;
-width: 100%;
-font-size: 15px;
-font-weight: 500;
-background: transparent;
-color: var(--text-main);
-}
-.eye-icon{
-width: 20px;
-height: 20px;
-cursor: pointer;
-opacity: 0.4;
-}
-.captcha-container {
-    margin: 20px 0;
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-}
-.captcha-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-main);
-    margin-bottom: 12px;
-}
-.captcha-puzzle-zone {
-    height: 60px;
-    background: #e2e8f0;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.captcha-bg-text {
-    font-size: 14px;
-    color: #94a3b8;
-    font-weight: bold;
-    letter-spacing: 1px;
-    user-select: none;
-}
-.captcha-target-slot {
-    width: 40px;
-    height: 40px;
-    background: rgba(37, 99, 235, 0.15);
-    border: 2px dashed #2563eb;
-    position: absolute;
-    border-radius: 8px;
-    top: 10px;
-}
-.captcha-movable-piece {
-    width: 40px;
-    height: 40px;
-    background: #2563eb;
-    color: white;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    border-radius: 8px;
-    top: 10px;
-    left: 0;
-    cursor: grab;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    font-weight: bold;
-    user-select: none;
-}
-.slider-track {
-    margin-top: 15px;
-    height: 12px;
-    background: #cbd5e1;
-    border-radius: 6px;
-    position: relative;
-}
-.slider-input {
-    width: 100%;
-    position: absolute;
-    top: -4px;
-    left: 0;
-    background: transparent;
-    -webkit-appearance: none;
-    appearance: none;
-    cursor: pointer;
+.input-group input {
+    border: none;
     outline: none;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+    background: transparent;
+    color: #f1f5f9;
 }
-.slider-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #4f46e5;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: background 0.2s;
+.input-group input::placeholder {
+    color: #64748b;
 }
-.slider-input::-webkit-slider-thumb:hover {
-    background: #2563eb;
+.eye-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.5;
+    filter: invert(1);
 }
-.captcha-status {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 700;
+.terms-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
     text-align: left;
 }
-.terms-box{
-display: flex;
-align-items: flex-start;
-gap: 10px;
-margin-bottom: 20px;
-text-align: left;
+.terms-box input {
+    margin-top: 3px;
+    accent-color: #818cf8;
+    width: 16px;
+    height: 16px;
 }
-.terms-box input{
-margin-top: 3px;
-accent-color: #2563eb;
-width: 16px;
-height: 16px;
+.terms-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
-.terms-text{
-font-size: 13px;
-color: var(--text-muted);
-line-height: 1.5;
+.terms-text a {
+    color: #a5b4fc;
+    font-weight: 600;
+    text-decoration: none;
 }
-.terms-text a{
-color: #2563eb;
-font-weight: 600;
-text-decoration: none;
+.btnlogin {
+    width: 100%;
+    background: var(--primary);
+    border: none;
+    color: #fff;
+    padding: 15px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px -3px rgba(99, 102, 241, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
 }
-.btnlogin{
-width: 100%;
-background: var(--primary);
-border: none;
-color: #fff;
-padding: 15px;
-border-radius: 14px;
-font-size: 16px;
-font-weight: 600;
-box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-cursor: pointer;
-transition: all 0.2s;
+.btnlogin:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -3px rgba(99, 102, 241, 0.5);
 }
-.btnlogin:hover{
-background: var(--primary-hover);
-transform: translateY(-1px);
-}
-.btnlogin:disabled{
-opacity: 0.6;
-cursor: not-allowed;
-transform: none;
+.btnlogin:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 .divider {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin: 22px 0;
     color: var(--text-muted);
     font-size: 13px;
 }
@@ -253,13 +305,13 @@ transform: none;
     background: var(--border);
 }
 .divider span {
-    padding: 0 12px;
+    padding: 0 14px;
 }
 .btn-google {
     width: 100%;
-    background: #fff;
+    background: rgba(30, 41, 59, 0.8);
     border: 1px solid var(--border);
-    color: var(--text-main);
+    color: #e2e8f0;
     padding: 14px;
     border-radius: 14px;
     font-size: 15px;
@@ -272,81 +324,98 @@ transform: none;
     transition: all 0.2s;
 }
 .btn-google:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: rgba(51, 65, 85, 0.9);
+    border-color: rgba(148, 163, 184, 0.4);
 }
 .btn-google img {
     width: 20px;
     height: 20px;
 }
-.switch-btn{
-margin-top: 20px;
-color: #2563eb;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-text-decoration: none;
-display: inline-block;
+.btn-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
-.custom-popup{
-position: fixed;
-top: 20px;
-left: 50%;
-transform: translateX(-50%) translateY(-30px);
-background: #fff;
-width: 90%;
-max-width: 360px;
-border-radius: 16px;
-padding: 16px;
-display: flex;
-align-items: center;
-gap: 12px;
-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-z-index: 99999;
-opacity: 0;
-visibility: hidden;
-transition: 0.3s ease;
-border: 1px solid var(--border);
+.switch-btn {
+    margin-top: 22px;
+    color: #a5b4fc;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
-.custom-popup.show{
-opacity: 1;
-visibility: visible;
-transform: translateX(-50%) translateY(0);
+.switch-btn:hover {
+    color: #c7d2fe;
 }
-.popup-icon{
-width: 36px;
-height: 36px;
-border-radius: 50%;
-background: #16a34a;
-color: #fff;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 18px;
-font-weight: bold;
-flex-shrink: 0;
+.custom-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    background: rgba(15, 23, 42, 0.95);
+    width: 90%;
+    max-width: 360px;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
 }
-.popup-text{
-flex: 1;
-text-align: left;
+.custom-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
-.popup-title{
-font-size: 14px;
-font-weight: 700;
-color: var(--text-main);
+.popup-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    flex-shrink: 0;
 }
-.popup-message{
-font-size: 12px;
-color: var(--text-muted);
+.popup-text {
+    flex: 1;
+    text-align: left;
 }
-.popup-close{
-cursor: pointer;
-font-size: 18px;
-color: #9ca3af;
+.popup-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+.popup-message {
+    font-size: 12px;
+    color: #94a3b8;
+}
+.popup-close {
+    cursor: pointer;
+    font-size: 18px;
+    color: #94a3b8;
 }
 </style>
 </head>
 <body>
+<div class="space-bg">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+    <div class="galaxy"></div>
+    <div class="galaxy2"></div>
+    <div class="moon"></div>
+    <div class="shooting-star"></div>
+</div>
 <div class="custom-popup" id="popup">
     <div class="popup-icon" id="popupIcon">✓</div>
     <div class="popup-text">
@@ -355,119 +424,37 @@ color: #9ca3af;
     </div>
     <div class="popup-close" onclick="closePopup()">×</div>
 </div>
-
 <div id="authPage">
 <div class="login-container">
-    <div class="logo-box">APP</div>
-    <h2>Create Account</h2>
-    <p class="subtitle">Sign up with Email or Google</p>
-
+    <div class="logo-box">RSL</div>
+    <h2>Login</h2>
     <form id="mainForm">
         <div class="input-group">
             <input type="email" id="email" placeholder="Enter Email Address" required autocomplete="email">
         </div>
         <div class="input-group">
-            <input type="password" id="password" placeholder="Create Password (min 6 chars)" required autocomplete="new-password">
+            <input type="password" id="password" placeholder="Enter Password" required autocomplete="current-password">
             <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" class="eye-icon" onclick="showPassword()" alt="toggle">
         </div>
-        <div class="input-group">
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required autocomplete="new-password">
-        </div>
-
-        <!-- Slider Captcha -->
-        <div class="captcha-container">
-            <div class="captcha-header">
-                <span>Security Verification</span>
-                <span style="cursor:pointer; color:#2563eb;" onclick="initSliderCaptcha()">↻ Refresh</span>
-            </div>
-            <div class="captcha-puzzle-zone">
-                <div class="captcha-bg-text">SLIDE TO VERIFY</div>
-                <div class="captcha-target-slot" id="targetSlot"></div>
-                <div class="captcha-movable-piece" id="movePiece">➔</div>
-            </div>
-            <div class="slider-track">
-                <input type="range" min="0" max="100" value="0" class="slider-input" id="captchaSlider" oninput="handleSliderMove(this.value)">
-            </div>
-            <div class="captcha-status" id="captchaStatus" style="color: #6b7280;">Slide the arrow to match the box</div>
-        </div>
-
         <div class="terms-box">
             <input type="checkbox" id="termsCheck">
             <div class="terms-text">
                 I agree to the <a href="#" target="_blank">Terms & Conditions</a>
             </div>
         </div>
-
-        <button class="btnlogin" type="submit" id="submitBtn">Create Account</button>
+        <button class="btnlogin" type="submit" id="submitBtn">Sign In</button>
     </form>
-
     <div class="divider"><span>OR</span></div>
-
-    <button type="button" class="btn-google" id="googleBtn" onclick="signUpWithGoogle()">
+    <button type="button" class="btn-google" id="googleBtn" onclick="signInWithGoogle()">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
         Continue with Google
     </button>
-
-    <a href="login.html" class="switch-btn">Already have an account? Sign In</a>
+    <a href="register.html" class="switch-btn">Don't have an account? Register</a>
 </div>
 </div>
-
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyCPmqtHu7l6rVSJSYdjSOlxGv3ikqczqSM",
-  authDomain: "tampotp-73b70.firebaseapp.com",
-  projectId: "tampotp-73b70",
-  storageBucket: "tampotp-73b70.firebasestorage.app",
-  messagingSenderId: "346771737337",
-  appId: "1:346771737337:web:10a11fb3c72a0607193028"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-let targetPercent = 0;
-let isCaptchaVerified = false;
+const PROXY_URL = "https://asdfgh.rakamare248.workers.dev";
 let popupTimer;
-
-function initSliderCaptcha() {
-    isCaptchaVerified = false;
-    document.getElementById("captchaSlider").value = 0;
-    document.getElementById("movePiece").style.left = "0px";
-    document.getElementById("captchaStatus").innerText = "Slide the arrow to match the box";
-    document.getElementById("captchaStatus").style.color = "#6b7280";
-
-    targetPercent = Math.floor(Math.random() * 45) + 40;
-
-    const zoneWidth = document.querySelector(".captcha-puzzle-zone").clientWidth;
-    const maxMove = zoneWidth - 40;
-    const slotLeft = (targetPercent / 100) * maxMove;
-    document.getElementById("targetSlot").style.left = slotLeft + "px";
-}
-
-setTimeout(initSliderCaptcha, 300);
-
-function handleSliderMove(value) {
-    const zoneWidth = document.querySelector(".captcha-puzzle-zone").clientWidth;
-    const maxMove = zoneWidth - 40;
-    const currentLeft = (value / 100) * maxMove;
-    document.getElementById("movePiece").style.left = currentLeft + "px";
-
-    if (Math.abs(value - targetPercent) <= 3) {
-        document.getElementById("captchaStatus").innerText = "Verification Successful! ✓";
-        document.getElementById("captchaStatus").style.color = "#16a34a";
-        isCaptchaVerified = true;
-    } else {
-        document.getElementById("captchaStatus").innerText = "Keep sliding to match...";
-        document.getElementById("captchaStatus").style.color = "#d97706";
-        isCaptchaVerified = false;
-    }
-}
-
-window.addEventListener('resize', initSliderCaptcha);
-
 function showPopup(type, title, message) {
     clearTimeout(popupTimer);
     const popup = document.getElementById("popup");
@@ -482,103 +469,61 @@ function showPopup(type, title, message) {
         icon.style.background = "#dc2626";
     }
     popup.classList.add("show");
-    popupTimer = setTimeout(() => {
-        popup.classList.remove("show");
-    }, 3000);
+    popupTimer = setTimeout(() => popup.classList.remove("show"), 3000);
 }
-
 function closePopup() {
     document.getElementById("popup").classList.remove("show");
 }
-
 function showPassword() {
     const pass = document.getElementById("password");
     pass.type = pass.type === "password" ? "text" : "password";
 }
-
-// ========== EMAIL REGISTER ==========
 document.getElementById("mainForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const confirmPassword = document.getElementById("confirmPassword").value.trim();
     const termsAccepted = document.getElementById("termsCheck").checked;
     const submitBtn = document.getElementById("submitBtn");
-
-    if (!email || !password || !confirmPassword) {
+    if (!email || !password) {
         showPopup("error", "Required", "Please fill in all fields");
-        return;
-    }
-    if (password.length < 6) {
-        showPopup("error", "Weak Password", "Password must be at least 6 characters");
-        return;
-    }
-    if (password !== confirmPassword) {
-        showPopup("error", "Password Mismatch", "Passwords do not match");
-        return;
-    }
-    if (!isCaptchaVerified) {
-        showPopup("error", "Security Check", "Please complete the slider puzzle correctly");
         return;
     }
     if (!termsAccepted) {
         showPopup("error", "Terms Required", "Please accept Terms & Conditions");
         return;
     }
-
     submitBtn.disabled = true;
-    submitBtn.innerText = "Creating Account...";
-
+    
+    submitBtn.innerText = "Signing in...";
     try {
-        await auth.createUserWithEmailAndPassword(email, password);
-        showPopup("success", "Account Created", "Welcome! Redirecting...");
-        initSliderCaptcha();
-        setTimeout(() => {
-            location.href = "dashboard.html";
-        }, 1200);
+        const res = await fetch(PROXY_URL + "/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            throw new Error(data.message || data.error || "Invalid email or password");
+        }
+        if (data.token) localStorage.setItem("token", data.token);
+        if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
+        if (data.email) localStorage.setItem("email", data.email);
+        else localStorage.setItem("email", email);
+        showPopup("success", "Login Success", "Welcome back!");
+        setTimeout(() => location.href = "dashboard.html", 1000);
     } catch (error) {
-        let msg = "Registration failed. Please try again.";
-        if (error.code === "auth/email-already-in-use") msg = "This email is already registered";
-        else if (error.code === "auth/invalid-email") msg = "Invalid email address";
-        else if (error.code === "auth/weak-password") msg = "Password is too weak";
-        showPopup("error", "Register Failed", msg);
-        initSliderCaptcha();
+        showPopup("error", "Login Failed", error.message || "Something went wrong");
     } finally {
         submitBtn.disabled = false;
-        submitBtn.innerText = "Create Account";
+        submitBtn.innerText = "Sign In";
     }
 });
-
-// ========== GOOGLE SIGN UP / LOGIN ==========
-async function signUpWithGoogle() {
-    if (!isCaptchaVerified) {
-        showPopup("error", "Security Check", "Please complete the slider puzzle first");
-        return;
-    }
+function signInWithGoogle() {
     if (!document.getElementById("termsCheck").checked) {
         showPopup("error", "Terms Required", "Please accept Terms & Conditions");
         return;
     }
-
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const googleBtn = document.getElementById("googleBtn");
-    googleBtn.disabled = true;
-
-    try {
-        await auth.signInWithPopup(provider);
-        showPopup("success", "Success", "Account ready!");
-        setTimeout(() => {
-            location.href = "dashboard.html";
-        }, 1000);
-    } catch (error) {
-        if (error.code !== "auth/popup-closed-by-user") {
-            showPopup("error", "Google Failed", error.message || "Something went wrong");
-        }
-        initSliderCaptcha();
-    } finally {
-        googleBtn.disabled = false;
-    }
+    window.location.href = PROXY_URL + "/auth/google";
 }
 </script>
 </body>
