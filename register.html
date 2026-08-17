@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+<title>Secure App - Register</title>
+<style>
+:root {
+    --primary: linear-gradient(135deg, #4f46e5, #2563eb);
+    --primary-hover: linear-gradient(135deg, #4338ca, #1d4ed8);
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body{
+background: var(--bg);
+color: var(--text-main);
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+padding: 20px;
+}
+#authPage{
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.login-container{
+width: 100%;
+max-width: 400px;
+background: var(--card-bg);
+border-radius: 24px;
+padding: 35px 30px;
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+text-align: center;
+}
+.logo-box{
+background: var(--primary);
+width: 70px;
+height: 70px;
+border-radius: 18px;
+margin: 0 auto 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+color: white;
+font-size: 24px;
+font-weight: 800;
+}
+h2{
+font-size: 24px;
+font-weight: 700;
+margin-bottom: 6px;
+}
+.subtitle{
+color: var(--text-muted);
+font-size: 14px;
+margin-bottom: 25px;
+}
+.input-group{
+background: #f9fafb;
+border-radius: 14px;
+padding: 14px 16px;
+display: flex;
+align-items: center;
+border: 1px solid var(--border);
+transition: all 0.2s ease;
+margin-bottom: 16px;
+}
+.input-group:focus-within {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+.input-group input{
+border: none;
+outline: none;
+width: 100%;
+font-size: 15px;
+font-weight: 500;
+background: transparent;
+color: var(--text-main);
+}
+.eye-icon{
+width: 20px;
+height: 20px;
+cursor: pointer;
+opacity: 0.4;
+}
+.captcha-container {
+    margin: 20px 0;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+}
+.captcha-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+.captcha-puzzle-zone {
+    height: 60px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.captcha-bg-text {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: bold;
+    letter-spacing: 1px;
+    user-select: none;
+}
+.captcha-target-slot {
+    width: 40px;
+    height: 40px;
+    background: rgba(37, 99, 235, 0.15);
+    border: 2px dashed #2563eb;
+    position: absolute;
+    border-radius: 8px;
+    top: 10px;
+}
+.captcha-movable-piece {
+    width: 40px;
+    height: 40px;
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 8px;
+    top: 10px;
+    left: 0;
+    cursor: grab;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-weight: bold;
+    user-select: none;
+}
+.slider-track {
+    margin-top: 15px;
+    height: 12px;
+    background: #cbd5e1;
+    border-radius: 6px;
+    position: relative;
+}
+.slider-input {
+    width: 100%;
+    position: absolute;
+    top: -4px;
+    left: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+}
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #4f46e5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background 0.2s;
+}
+.slider-input::-webkit-slider-thumb:hover {
+    background: #2563eb;
+}
+.captcha-status {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+}
+.terms-box{
+display: flex;
+align-items: flex-start;
+gap: 10px;
+margin-bottom: 20px;
+text-align: left;
+}
+.terms-box input{
+margin-top: 3px;
+accent-color: #2563eb;
+width: 16px;
+height: 16px;
+}
+.terms-text{
+font-size: 13px;
+color: var(--text-muted);
+line-height: 1.5;
+}
+.terms-text a{
+color: #2563eb;
+font-weight: 600;
+text-decoration: none;
+}
+.btnlogin{
+width: 100%;
+background: var(--primary);
+border: none;
+color: #fff;
+padding: 15px;
+border-radius: 14px;
+font-size: 16px;
+font-weight: 600;
+box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+cursor: pointer;
+transition: all 0.2s;
+}
+.btnlogin:hover{
+background: var(--primary-hover);
+transform: translateY(-1px);
+}
+.btnlogin:disabled{
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+.divider span {
+    padding: 0 12px;
+}
+.btn-google {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+}
+.btn-google:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+.btn-google img {
+    width: 20px;
+    height: 20px;
+}
+.switch-btn{
+margin-top: 20px;
+color: #2563eb;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+text-decoration: none;
+display: inline-block;
+}
+.custom-popup{
+position: fixed;
+top: 20px;
+left: 50%;
+transform: translateX(-50%) translateY(-30px);
+background: #fff;
+width: 90%;
+max-width: 360px;
+border-radius: 16px;
+padding: 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+z-index: 99999;
+opacity: 0;
+visibility: hidden;
+transition: 0.3s ease;
+border: 1px solid var(--border);
+}
+.custom-popup.show{
+opacity: 1;
+visibility: visible;
+transform: translateX(-50%) translateY(0);
+}
+.popup-icon{
+width: 36px;
+height: 36px;
+border-radius: 50%;
+background: #16a34a;
+color: #fff;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 18px;
+font-weight: bold;
+flex-shrink: 0;
+}
+.popup-text{
+flex: 1;
+text-align: left;
+}
+.popup-title{
+font-size: 14px;
+font-weight: 700;
+color: var(--text-main);
+}
+.popup-message{
+font-size: 12px;
+color: var(--text-muted);
+}
+.popup-close{
+cursor: pointer;
+font-size: 18px;
+color: #9ca3af;
+}
+</style>
+</head>
+<body>
+<div class="custom-popup" id="popup">
+    <div class="popup-icon" id="popupIcon">✓</div>
+    <div class="popup-text">
+        <div class="popup-title" id="popupTitle">Success</div>
+        <div class="popup-message" id="popupMessage">Action completed</div>
+    </div>
+    <div class="popup-close" onclick="closePopup()">×</div>
+</div>
+
+<div id="authPage">
+<div class="login-container">
+    <div class="logo-box">APP</div>
+    <h2>Create Account</h2>
+    <p class="subtitle">Sign up with Email or Google</p>
+
+    <form id="mainForm">
+        <div class="input-group">
+            <input type="email" id="email" placeholder="Enter Email Address" required autocomplete="email">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Create Password (min 6 chars)" required autocomplete="new-password">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" class="eye-icon" onclick="showPassword()" alt="toggle">
+        </div>
+        <div class="input-group">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required autocomplete="new-password">
+        </div>
+
+        <!-- Slider Captcha -->
+        <div class="captcha-container">
+            <div class="captcha-header">
+                <span>Security Verification</span>
+                <span style="cursor:pointer; color:#2563eb;" onclick="initSliderCaptcha()">↻ Refresh</span>
+            </div>
+            <div class="captcha-puzzle-zone">
+                <div class="captcha-bg-text">SLIDE TO VERIFY</div>
+                <div class="captcha-target-slot" id="targetSlot"></div>
+                <div class="captcha-movable-piece" id="movePiece">➔</div>
+            </div>
+            <div class="slider-track">
+                <input type="range" min="0" max="100" value="0" class="slider-input" id="captchaSlider" oninput="handleSliderMove(this.value)">
+            </div>
+            <div class="captcha-status" id="captchaStatus" style="color: #6b7280;">Slide the arrow to match the box</div>
+        </div>
+
+        <div class="terms-box">
+            <input type="checkbox" id="termsCheck">
+            <div class="terms-text">
+                I agree to the <a href="#" target="_blank">Terms & Conditions</a>
+            </div>
+        </div>
+
+        <button class="btnlogin" type="submit" id="submitBtn">Create Account</button>
+    </form>
+
+    <div class="divider"><span>OR</span></div>
+
+    <button type="button" class="btn-google" id="googleBtn" onclick="signUpWithGoogle()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+        Continue with Google
+    </button>
+
+    <a href="login.html" class="switch-btn">Already have an account? Sign In</a>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCPmqtHu7l6rVSJSYdjSOlxGv3ikqczqSM",
+  authDomain: "tampotp-73b70.firebaseapp.com",
+  projectId: "tampotp-73b70",
+  storageBucket: "tampotp-73b70.firebasestorage.app",
+  messagingSenderId: "346771737337",
+  appId: "1:346771737337:web:10a11fb3c72a0607193028"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+let targetPercent = 0;
+let isCaptchaVerified = false;
+let popupTimer;
+
+function initSliderCaptcha() {
+    isCaptchaVerified = false;
+    document.getElementById("captchaSlider").value = 0;
+    document.getElementById("movePiece").style.left = "0px";
+    document.getElementById("captchaStatus").innerText = "Slide the arrow to match the box";
+    document.getElementById("captchaStatus").style.color = "#6b7280";
+
+    targetPercent = Math.floor(Math.random() * 45) + 40;
+
+    const zoneWidth = document.querySelector(".captcha-puzzle-zone").clientWidth;
+    const maxMove = zoneWidth - 40;
+    const slotLeft = (targetPercent / 100) * maxMove;
+    document.getElementById("targetSlot").style.left = slotLeft + "px";
+}
+
+setTimeout(initSliderCaptcha, 300);
+
+function handleSliderMove(value) {
+    const zoneWidth = document.querySelector(".captcha-puzzle-zone").clientWidth;
+    const maxMove = zoneWidth - 40;
+    const currentLeft = (value / 100) * maxMove;
+    document.getElementById("movePiece").style.left = currentLeft + "px";
+
+    if (Math.abs(value - targetPercent) <= 3) {
+        document.getElementById("captchaStatus").innerText = "Verification Successful! ✓";
+        document.getElementById("captchaStatus").style.color = "#16a34a";
+        isCaptchaVerified = true;
+    } else {
+        document.getElementById("captchaStatus").innerText = "Keep sliding to match...";
+        document.getElementById("captchaStatus").style.color = "#d97706";
+        isCaptchaVerified = false;
+    }
+}
+
+window.addEventListener('resize', initSliderCaptcha);
+
+function showPopup(type, title, message) {
+    clearTimeout(popupTimer);
+    const popup = document.getElementById("popup");
+    const icon = document.getElementById("popupIcon");
+    document.getElementById("popupTitle").innerText = title;
+    document.getElementById("popupMessage").innerText = message;
+    if (type === "success") {
+        icon.innerHTML = "✓";
+        icon.style.background = "#16a34a";
+    } else {
+        icon.innerHTML = "!";
+        icon.style.background = "#dc2626";
+    }
+    popup.classList.add("show");
+    popupTimer = setTimeout(() => {
+        popup.classList.remove("show");
+    }, 3000);
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("show");
+}
+
+function showPassword() {
+    const pass = document.getElementById("password");
+    pass.type = pass.type === "password" ? "text" : "password";
+}
+
+// ========== EMAIL REGISTER ==========
+document.getElementById("mainForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const termsAccepted = document.getElementById("termsCheck").checked;
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (!email || !password || !confirmPassword) {
+        showPopup("error", "Required", "Please fill in all fields");
+        return;
+    }
+    if (password.length < 6) {
+        showPopup("error", "Weak Password", "Password must be at least 6 characters");
+        return;
+    }
+    if (password !== confirmPassword) {
+        showPopup("error", "Password Mismatch", "Passwords do not match");
+        return;
+    }
+    if (!isCaptchaVerified) {
+        showPopup("error", "Security Check", "Please complete the slider puzzle correctly");
+        return;
+    }
+    if (!termsAccepted) {
+        showPopup("error", "Terms Required", "Please accept Terms & Conditions");
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Creating Account...";
+
+    try {
+        await auth.createUserWithEmailAndPassword(email, password);
+        showPopup("success", "Account Created", "Welcome! Redirecting...");
+        initSliderCaptcha();
+        setTimeout(() => {
+            location.href = "dashboard.html";
+        }, 1200);
+    } catch (error) {
+        let msg = "Registration failed. Please try again.";
+        if (error.code === "auth/email-already-in-use") msg = "This email is already registered";
+        else if (error.code === "auth/invalid-email") msg = "Invalid email address";
+        else if (error.code === "auth/weak-password") msg = "Password is too weak";
+        showPopup("error", "Register Failed", msg);
+        initSliderCaptcha();
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Create Account";
+    }
+});
+
+// ========== GOOGLE SIGN UP / LOGIN ==========
+async function signUpWithGoogle() {
+    if (!isCaptchaVerified) {
+        showPopup("error", "Security Check", "Please complete the slider puzzle first");
+        return;
+    }
+    if (!document.getElementById("termsCheck").checked) {
+        showPopup("error", "Terms Required", "Please accept Terms & Conditions");
+        return;
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const googleBtn = document.getElementById("googleBtn");
+    googleBtn.disabled = true;
+
+    try {
+        await auth.signInWithPopup(provider);
+        showPopup("success", "Success", "Account ready!");
+        setTimeout(() => {
+            location.href = "dashboard.html";
+        }, 1000);
+    } catch (error) {
+        if (error.code !== "auth/popup-closed-by-user") {
+            showPopup("error", "Google Failed", error.message || "Something went wrong");
+        }
+        initSliderCaptcha();
+    } finally {
+        googleBtn.disabled = false;
+    }
+}
+</script>
+</body>
+</html>
