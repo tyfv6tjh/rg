@@ -13,7 +13,6 @@
       color: #1a1a2e;
       min-height: 100vh;
     }
-
     /* Topbar */
     .topbar {
       background: #fff;
@@ -30,6 +29,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
     .logo {
       font-size: 1.3rem;
@@ -44,6 +44,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      position: relative;
     }
     .user-info img {
       width: 42px;
@@ -51,9 +52,15 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #e8f0fe;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .user-info img:hover {
+      border-color: #0a2a5e;
     }
     .user-details {
       line-height: 1.3;
+      cursor: pointer;
     }
     .user-name {
       font-weight: 600;
@@ -63,25 +70,189 @@
       font-size: 0.8rem;
       color: #666;
     }
-    .logout-btn {
-      background: #fee2e2;
-      color: #b91c1c;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
+    /* Wallet */
+    .wallet-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      border: 1.5px solid #fdba74;
+      padding: 7px 14px;
+      border-radius: 50px;
       cursor: pointer;
-      font-size: 0.9rem;
       transition: 0.2s;
+      margin-right: 4px;
     }
-    .logout-btn:hover { background: #fecaca; }
-
+    .wallet-box:hover {
+      background: linear-gradient(135deg, #ffedd5, #fed7aa);
+      transform: translateY(-1px);
+    }
+    .wallet-box .wallet-icon {
+      font-size: 1.2rem;
+    }
+    .wallet-box .wallet-amount {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #c2410c;
+    }
+    .wallet-box .wallet-label {
+      font-size: 0.75rem;
+      color: #9a3412;
+      font-weight: 500;
+    }
+    /* Profile Dropdown */
+    .profile-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      min-width: 180px;
+      padding: 8px 0;
+      display: none;
+      z-index: 200;
+      border: 1px solid #eee;
+    }
+    .profile-dropdown.show {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .profile-dropdown .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      color: #1a1a2e;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.15s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+    }
+    .profile-dropdown .dropdown-item:hover {
+      background: #f5f8ff;
+    }
+    .profile-dropdown .dropdown-item.logout {
+      color: #b91c1c;
+    }
+    .profile-dropdown .dropdown-item.logout:hover {
+      background: #fef2f2;
+    }
+    .profile-dropdown .divider {
+      height: 1px;
+      background: #eee;
+      margin: 6px 0;
+    }
+    /* Hamburger Menu */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 20px;
+      cursor: pointer;
+      padding: 2px 0;
+      background: none;
+      border: none;
+      z-index: 110;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #0a2a5e;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    /* Features Side Menu */
+    .features-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 4px 0 25px rgba(0,0,0,0.1);
+      z-index: 150;
+      transition: left 0.3s ease;
+      padding-top: 70px;
+      overflow-y: auto;
+    }
+    .features-menu.open {
+      left: 0;
+    }
+    .features-menu h3 {
+      font-size: 1.1rem;
+      color: #0a2a5e;
+      padding: 0 22px 14px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 10px;
+    }
+    .features-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: 0.15s;
+    }
+    .features-menu a:hover {
+      background: #f0f5ff;
+      color: #0a2a5e;
+    }
+    .features-menu a span.icon {
+      font-size: 1.15rem;
+      width: 24px;
+      text-align: center;
+    }
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.35);
+      z-index: 140;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .menu-overlay.show {
+      display: block;
+      opacity: 1;
+    }
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
     .container {
       max-width: 1100px;
       margin: 30px auto;
       padding: 0 20px;
     }
-
     /* Welcome Card */
     .welcome-card {
       background: linear-gradient(135deg, #0a2a5e, #1a4a8a);
@@ -114,7 +285,6 @@
       transition: 0.2s;
     }
     .buy-more:hover { transform: translateY(-2px); }
-
     /* Stats */
     .stats {
       display: grid;
@@ -139,14 +309,12 @@
       color: #666;
       font-size: 0.9rem;
     }
-
     .section-title {
       font-size: 1.3rem;
       font-weight: 700;
       color: #0a2a5e;
       margin-bottom: 18px;
     }
-
     /* Services */
     .services-grid {
       display: grid;
@@ -175,7 +343,6 @@
       margin-top: 10px;
     }
     .service-card .date { color: #888; font-size: 0.85rem; margin-top: 8px; }
-
     /* Transactions */
     .transactions {
       background: #fff;
@@ -206,7 +373,6 @@
     }
     .badge.success { background: #dcfce7; color: #166534; }
     .badge.pending { background: #fef3c7; color: #92400e; }
-
     .empty-state {
       text-align: center;
       padding: 50px 20px;
@@ -217,33 +383,75 @@
       padding: 40px;
       color: #666;
     }
-
     @media (max-width: 600px) {
       .welcome-card { flex-direction: column; text-align: center; }
-      .user-info { gap: 10px; }
+      .user-info { gap: 8px; }
       .user-details { display: none; }
+      .wallet-box .wallet-label { display: none; }
+      .wallet-box { padding: 6px 12px; }
       th, td { padding: 10px 12px; font-size: 0.85rem; }
+      .logo { font-size: 1.1rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Features Side Menu -->
+  <div class="menu-overlay" id="menuOverlay" onclick="closeFeaturesMenu()"></div>
+  <div class="features-menu" id="featuresMenu">
+    <h3>✨ Features</h3>
+    <a href="index.html"><span class="icon">🏠</span> Home</a>
+    <a href="#services"><span class="icon">📦</span> My Services</a>
+    <a href="#transactions"><span class="icon">💳</span> Transactions</a>
+    <a href="index.html"><span class="icon">🛒</span> Buy New Service</a>
+    <a href="#"><span class="icon">🎫</span> Book Tickets</a>
+    <a href="#"><span class="icon">📋</span> PNR Status</a>
+    <a href="#"><span class="icon">🚂</span> Train Schedule</a>
+    <a href="#"><span class="icon">💰</span> Refund Status</a>
+    <a href="#"><span class="icon">❓</span> Help & Support</a>
+  </div>
 
   <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-inner">
-      <a href="index.html" class="logo">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#0a2a5e">
-          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.5 15.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.59-5.59L17.5 9.5l-7 7z"/>
-        </svg>
-        IRCTC Dashboard
-      </a>
+      <div class="left-section">
+        <!-- Hamburger (3 lines) -->
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleFeaturesMenu()" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="index.html" class="logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#0a2a5e">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.5 15.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.59-5.59L17.5 9.5l-7 7z"/>
+          </svg>
+          IRCTC Dashboard
+        </a>
+      </div>
       <div class="user-info">
-        <img id="userPhoto" src="https://ui-avatars.com/api/?name=User&background=0a2a5e&color=fff" alt="User">
-        <div class="user-details">
+        <!-- Wallet (Profile ke left side) -->
+        <div class="wallet-box" id="walletBox" title="Wallet Balance">
+          <span class="wallet-icon">👛</span>
+          <div>
+            <div class="wallet-amount" id="walletAmount">₹0</div>
+            <div class="wallet-label">Wallet</div>
+          </div>
+        </div>
+
+        <img id="userPhoto" src="https://ui-avatars.com/api/?name=User&background=0a2a5e&color=fff" alt="User" onclick="toggleProfileDropdown(event)">
+        <div class="user-details" onclick="toggleProfileDropdown(event)">
           <div class="user-name" id="userName">User</div>
           <div class="user-email" id="userEmail">email@example.com</div>
         </div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <!-- Profile Dropdown (Logout yahan dikhega) -->
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="dropdown-item" style="cursor:default; font-weight:600; color:#0a2a5e;">
+            <span>👤</span> Profile
+          </div>
+          <div class="divider"></div>
+          <button class="dropdown-item logout" onclick="logout()">
+            <span>🚪</span> Logout
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -257,7 +465,6 @@
       </div>
       <a href="index.html" class="buy-more">+ Buy More</a>
     </div>
-
     <!-- Stats -->
     <div class="stats">
       <div class="stat-card">
@@ -273,15 +480,13 @@
         <div class="label">Transactions</div>
       </div>
     </div>
-
     <!-- My Services -->
-    <h3 class="section-title">📦 My Services</h3>
+    <h3 class="section-title" id="services">📦 My Services</h3>
     <div class="services-grid" id="servicesGrid">
       <div class="loading">Loading your services...</div>
     </div>
-
     <!-- Transactions -->
-    <h3 class="section-title">💳 Transaction History</h3>
+    <h3 class="section-title" id="transactions">💳 Transaction History</h3>
     <div class="transactions">
       <table>
         <thead>
@@ -305,19 +510,45 @@
 <script>
   const WORKER_URL = "https://asdfgh.rakamare248.workers.dev";
 
+  // ====================== FEATURES MENU ======================
+  function toggleFeaturesMenu() {
+    const menu = document.getElementById("featuresMenu");
+    const overlay = document.getElementById("menuOverlay");
+    const btn = document.getElementById("hamburgerBtn");
+    menu.classList.toggle("open");
+    overlay.classList.toggle("show");
+    btn.classList.toggle("active");
+  }
+  function closeFeaturesMenu() {
+    document.getElementById("featuresMenu").classList.remove("open");
+    document.getElementById("menuOverlay").classList.remove("show");
+    document.getElementById("hamburgerBtn").classList.remove("active");
+  }
+
+  // ====================== PROFILE DROPDOWN ======================
+  function toggleProfileDropdown(e) {
+    e.stopPropagation();
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.classList.toggle("show");
+  }
+  // Click bahar karne par dropdown band
+  document.addEventListener("click", function(e) {
+    const dropdown = document.getElementById("profileDropdown");
+    if (dropdown.classList.contains("show")) {
+      dropdown.classList.remove("show");
+    }
+  });
+
   // ====================== AUTH CHECK ======================
   function checkLogin() {
     const email = localStorage.getItem("email");
     const token = localStorage.getItem("token");
-
     if (!email) {
-      // Login nahi hai → login page pe bhejo
       window.location.href = "login.html";
       return null;
     }
     return { email, token };
   }
-
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
@@ -331,35 +562,33 @@
   async function loadDashboard() {
     const auth = checkLogin();
     if (!auth) return;
-
     const email = auth.email;
-
-    // Header me email dikhao
     const name = email.split("@")[0];
     const displayName = name.charAt(0).toUpperCase() + name.slice(1);
-
     document.getElementById("userName").textContent = displayName;
     document.getElementById("userEmail").textContent = email;
     document.getElementById("welcomeName").textContent = displayName;
-    document.getElementById("userPhoto").src = 
+    document.getElementById("userPhoto").src =
       `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=0a2a5e&color=fff&size=128`;
 
-    // User data Worker se lao
-    let userData = { services: [], transactions: [] };
-
+    let userData = { services: [], transactions: [], wallet: 0 };
     try {
-      // Pehle /user/{email} try karo
       let res = await fetch(`${WORKER_URL}/user/${encodeURIComponent(email)}`);
       if (res.ok) {
         const data = await res.json();
         if (data) {
           userData.services = data.services || [];
           userData.transactions = data.transactions || [];
+          userData.wallet = data.wallet || data.balance || 0;
         }
       }
     } catch (e) {
       console.log("Could not load user data from worker");
     }
+
+    // Wallet amount set karo (default ₹0)
+    const walletBal = Number(userData.wallet) || 0;
+    document.getElementById("walletAmount").textContent = "₹" + walletBal;
 
     renderServices(userData.services);
     renderTransactions(userData.transactions);
@@ -369,7 +598,6 @@
   // ====================== RENDER ======================
   function renderServices(services) {
     const grid = document.getElementById("servicesGrid");
-
     if (!services || services.length === 0) {
       grid.innerHTML = `
         <div class="empty-state" style="grid-column: 1 / -1;">
@@ -378,7 +606,6 @@
         </div>`;
       return;
     }
-
     grid.innerHTML = services.map(s => `
       <div class="service-card ${s.type === 'premium' ? 'premium' : ''}">
         <h3>${s.name || 'IRCTC User ID'}</h3>
@@ -389,17 +616,14 @@
       </div>
     `).join("");
   }
-
   function renderTransactions(txns) {
     const body = document.getElementById("txnBody");
     const empty = document.getElementById("emptyTxns");
-
     if (!txns || txns.length === 0) {
       body.innerHTML = "";
       empty.style.display = "block";
       return;
     }
-
     empty.style.display = "none";
     body.innerHTML = txns.map(t => `
       <tr>
@@ -415,10 +639,8 @@
       </tr>
     `).join("");
   }
-
   function updateStats(services, txns) {
     const totalSpent = (txns || []).reduce((sum, t) => sum + (Number(t.amount) || 0), 0);
-
     document.getElementById("totalServices").textContent = (services || []).length;
     document.getElementById("totalSpent").textContent = "₹" + totalSpent;
     document.getElementById("totalTxns").textContent = (txns || []).length;
