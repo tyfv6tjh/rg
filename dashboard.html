@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRCTC User ID Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;background:#f4f8fc;color:#1a1a2e;line-height:1.5}
+    .navbar{background:#fff;box-shadow:0 2px 15px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;padding:12px 0}
+    .nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;font-size:1.4rem;font-weight:800;color:#0a2a5e;text-decoration:none}
+    .logo svg{width:36px;height:36px}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{text-decoration:none;color:#333;font-weight:500;font-size:.95rem}
+    .nav-links a:hover,.nav-links a.active{color:#e67e00}
+    .menu-toggle{display:none;font-size:1.6rem;cursor:pointer}
+    .hero{background:linear-gradient(180deg,#e8f1ff 0%,#f4f8fc 100%);padding:50px 20px 40px;text-align:center}
+    .pricing-cards{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto 35px}
+    .card{width:320px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.1);transition:.3s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,.15)}
+    .card-header{padding:22px 20px 16px;color:#fff;font-weight:700}
+    .card-header.basic{background:linear-gradient(135deg,#ff8c00,#ff6b00)}
+    .card-header.premium{background:linear-gradient(135deg,#1a5cff,#0044cc)}
+    .card-header h3{font-size:1.15rem;margin-bottom:6px;opacity:.95}
+    .card-header .price{font-size:2rem;font-weight:800}
+    .card-header .price span{font-size:1.1rem;font-weight:600}
+    .card-body{padding:22px 24px 26px}
+    .card-body ul{list-style:none}
+    .card-body li{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:.98rem;font-weight:500}
+    .check{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff;flex-shrink:0}
+    .basic .check{background:#ff8c00}
+    .premium .check{background:#1a5cff}
+    .buy-now{display:inline-block;background:linear-gradient(135deg,#ff8c00,#e06700);color:#fff;text-decoration:none;padding:14px 48px;border-radius:50px;font-size:1.15rem;font-weight:700;box-shadow:0 8px 25px rgba(255,120,0,.35);transition:.3s}
+    .buy-now:hover{transform:scale(1.05)}
+    .how-to-order{padding:50px 20px 60px;background:#fff;text-align:center}
+    .section-title{font-size:1.9rem;font-weight:800;color:#0a2a5e;margin-bottom:35px}
+    .scroll-wrapper{overflow:hidden;max-width:1100px;margin:0 auto;mask-image:linear-gradient(to right,transparent,black 4%,black 96%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 4%,black 96%,transparent)}
+    .scroll-track{display:flex;gap:22px;width:max-content;animation:scroll 28s linear infinite}
+    .scroll-track:hover{animation-play-state:paused}
+    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .step-box{width:270px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.1);flex-shrink:0;transition:.3s;text-decoration:none;color:inherit;display:block}
+    .step-box:hover{transform:translateY(-8px);box-shadow:0 18px 35px rgba(0,80,200,.18)}
+    .step-box img{width:100%;height:160px;object-fit:cover;display:block}
+    .step-content{padding:18px 16px 22px;text-align:center}
+    .step-content h4{font-size:1.15rem;font-weight:700;color:#0a2a5e;margin-bottom:8px}
+    .step-content p{font-size:.92rem;color:#555}
+    .experience{display:flex;align-items:center;max-width:1200px;margin:0 auto;padding:50px 20px;gap:40px;flex-wrap:wrap}
+    .experience-text{flex:1;min-width:280px}
+    .experience-text h2{font-size:2.2rem;font-weight:800;color:#0a2a5e;margin-bottom:12px}
+    .experience-text p{font-size:1.1rem;color:#555}
+    .experience-img{flex:1.2;min-width:300px;border-radius:20px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.12)}
+    .experience-img img{width:100%;height:auto;display:block}
+    .whatsapp-cta{background:linear-gradient(135deg,#0a2a5e,#003366);padding:35px 20px;text-align:center;color:#fff}
+    .whatsapp-cta h3{font-size:1.5rem;font-weight:700;margin-bottom:18px}
+    .wa-number{display:inline-flex;align-items:center;gap:14px;background:linear-gradient(90deg,#ff8c00,#ff5500);padding:16px 32px;border-radius:60px;font-size:1.6rem;font-weight:800;text-decoration:none;color:#fff;box-shadow:0 10px 30px rgba(255,100,0,.4);transition:.3s}
+    .wa-number:hover{transform:scale(1.05)}
+    .wa-number svg{width:32px;height:32px}
+    .trusted{text-align:center;padding:30px 20px 40px;background:#fff}
+    .trusted-badge{display:inline-flex;align-items:center;gap:10px;background:#f0f7ff;border:1px solid #d0e4ff;padding:12px 28px;border-radius:50px;font-weight:700;color:#0a2a5e}
+    .trusted-badge svg{width:24px;height:24px;fill:#0a7a2f}
+    footer{background:#0a1a2f;color:#a0b4d0;padding:25px 20px;text-align:center;font-size:.9rem}
+    .footer-links{display:flex;justify-content:center;gap:25px;margin-bottom:12px;flex-wrap:wrap}
+    .footer-links a{color:#c0d4f0;text-decoration:none}
+    @media(max-width:768px){
+      .nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;box-shadow:0 10px 20px rgba(0,0,0,.1);gap:15px}
+      .nav-links.active{display:flex}
+      .menu-toggle{display:block}
+      .experience{flex-direction:column-reverse;text-align:center}
+      .wa-number{font-size:1.25rem;padding:14px 22px}
+      .step-box{width:240px}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 24 24" fill="#0a2a5e"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.5 15.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.59-5.59L17.5 9.5l-7 7z"/></svg>
+      IRCTC
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Our Services</a></li>
+      <li><a href="#pricing" class="active">Pricing</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+    <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</div>
+  </div>
+</nav>
+
+<section class="hero" id="pricing">
+  <div class="pricing-cards" id="pricingCards">
+    <!-- Dynamic content will come here -->
+  </div>
+  <a href="https://wa.me/84947229295?text=Namaste%2C%20mujhe%20IRCTC%20User%20ID%20chahiye" class="buy-now" target="_blank">BUY NOW</a>
+</section>
+
+<section class="how-to-order" id="services">
+  <h2 class="section-title">How to Order</h2>
+  <div class="scroll-wrapper">
+    <div class="scroll-track" id="scrollTrack">
+      <!-- Dynamic slides will come here -->
+    </div>
+  </div>
+</section>
+
+<section class="experience">
+  <div class="experience-text">
+    <h2>Experience the Speed</h2>
+    <p>Faster bookings for faster vishwasniya service.</p>
+  </div>
+  <div class="experience-img">
+    <img src="https://images.unsplash.com/photo-1544620341-1adc27c5b8d1?auto=format&fit=crop&w=1000&q=80" alt="Train">
+  </div>
+</section>
+
+<section class="whatsapp-cta" id="contact">
+  <h3>यूजर आईडी खरीदने के लिए अभी WhatsApp करें!</h3>
+  <a href="https://wa.me/84947229295" class="wa-number" target="_blank">
+    +84 94 722 92 95
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</section>
+
+<div class="trusted">
+  <div class="trusted-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    Trusted Seller
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#services">Our Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact Us</a>
+  </div>
+  <p>© 2026 IRCTC User ID Service. All rights reserved.</p>
+</footer>
+
+<script>
+  const WORKER_URL = "https://asdfgh.rakamare248.workers.dev";
+
+  // Default data (fallback)
+  let siteData = {
+    prices: {
+      basic: {
+        price: 120,
+        title: "Basic User ID",
+        subtitle: "IRCTC यूजर आईडी",
+        features: ["Tez aur Vishwasniya Service", "Train Ticket Bookings in Minutes", "Full Guarantee Today by 12:00 PM", "Bina Rukaavat ke Ticket Book"]
+      },
+      premium: {
+        price: 200,
+        title: "Premium User ID",
+        subtitle: "प्रीमियम यूजर आईडी",
+        features: ["Super-Fast Booking aur Support", "Ek Mahine ki Full Guarantee", "Tez aur Vishwasniya Service", "Train Ticket Bookings in Minutes"]
+      }
+    },
+    slides: [
+      { image: "https://images.unsplash.com/photo-1544620341-1adc27c5b8d1?auto=format&fit=crop&w=600&q=80", title: "Click Order Now", description: "Simply click the BUY NOW button to start", link: "https://wa.me/84947229295" },
+      { image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80", title: "Share Details", description: "Send your details on WhatsApp", link: "https://wa.me/84947229295" },
+      { image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80", title: "Get Instant ID", description: "Receive your IRCTC User ID immediately", link: "https://wa.me/84947229295" },
+      { image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80", title: "Start Booking", description: "Book train tickets in minutes easily", link: "https://wa.me/84947229295" }
+    ]
+  };
+
+  async function loadData() {
+    try {
+      const res = await fetch(WORKER_URL + "/data");
+      if (res.ok) {
+        const data = await res.json();
+        if (data) siteData = data;
+      }
+    } catch (e) {
+      console.log("Using default data");
+    }
+    renderPricing();
+    renderSlides();
+  }
+
+  function renderPricing() {
+    const p = siteData.prices;
+    document.getElementById("pricingCards").innerHTML = `
+      <div class="card">
+        <div class="card-header basic">
+          <h3>${p.basic.title}</h3>
+          <div class="price">₹${p.basic.price} <span>में</span></div>
+          <div style="font-size:1rem;margin-top:4px">${p.basic.subtitle}</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            ${p.basic.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header premium">
+          <h3>${p.premium.title}</h3>
+          <div class="price">₹${p.premium.price}</div>
+          <div style="font-size:1rem;margin-top:4px">${p.premium.subtitle}</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            ${p.premium.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderSlides() {
+    const slides = siteData.slides;
+    let html = "";
+    // Original + duplicate for infinite scroll
+    [...slides, ...slides].forEach(s => {
+      html += `
+        <a href="${s.link}" class="step-box" target="_blank">
+          <img src="${s.image}" alt="${s.title}">
+          <div class="step-content">
+            <h4>${s.title}</h4>
+            <p>${s.description}</p>
+          </div>
+        </a>
+      `;
+    });
+    document.getElementById("scrollTrack").innerHTML = html;
+  }
+
+  loadData();
+</script>
+</body>
+</html>
